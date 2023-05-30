@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>my_project</name>
+  <version>0.0.0</version>
+  <description>The my_package package</description>
+
+  <maintainer email="tian.r.king@gmail.com">user</maintainer>
+
+  <license>w0x7ce Licence</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+
