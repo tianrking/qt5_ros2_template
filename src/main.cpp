@@ -4,7 +4,8 @@
 #include <QFile>
 #include <QWidget>
 #include <QPushButton>
-//#include <ament_index_cpp/get_package_share_directory.hpp>
+#include <QSlider>
+#include <sstream>
 #include <std_msgs/msg/string.hpp>
 
 int main(int argc, char** argv) {
@@ -20,7 +21,7 @@ int main(int argc, char** argv) {
 
   auto node = rclcpp::Node::make_shared("my_node");
   auto publisher = node->create_publisher<std_msgs::msg::String>("topic", 10);
-
+  auto publisher_value = node->create_publisher<std_msgs::msg::String>("value", 10);
   // Assuming there's a QPushButton in your UI file with the objectName "myButton"
   QPushButton *button = window->findChild<QPushButton*>("pushButton");
   if (button != nullptr) {
@@ -30,6 +31,18 @@ int main(int argc, char** argv) {
         publisher->publish(message);
     });
   }
+  
+  auto slider = window->findChild<QSlider*>("horizontalSlider");
+  if(slider) {
+    QObject::connect(slider, &QSlider::valueChanged, [node, publisher_value](int value) {
+        std::ostringstream oss;
+        oss << "Slider value: " << value;
+        auto message = std_msgs::msg::String();
+        message.data = oss.str();
+        publisher_value->publish(message);
+    });
+  }
+
 
   window->show();
 
