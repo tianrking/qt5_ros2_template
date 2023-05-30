@@ -14,6 +14,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS UiTools REQUIRED)
 
 include_directories(
   ${rclcpp_INCLUDE_DIRS}
@@ -26,6 +27,8 @@ target_link_libraries(my_executable
   ${rclcpp_LIBRARIES} 
   Qt5::Widgets
 )
+
+target_link_libraries(my_executable Qt5::UiTools)
 
 ament_target_dependencies(my_executable rclcpp)
 
